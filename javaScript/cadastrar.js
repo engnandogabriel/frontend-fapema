@@ -1,5 +1,5 @@
 
-const url = 'https://fapema-api.herokuapp.com/fapema';
+const url = 'https://api-fapema.herokuapp.com/fapema';
 var access_token = sessionStorage.getItem('token')
 var cadastrar = document.querySelector('.cadastrar');
 var msgSucesso = document.querySelector('.msg-sucesso');

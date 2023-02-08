@@ -1,5 +1,5 @@
 
-const url = 'https://fapema-api.herokuapp.com/fapema'
+const url = 'https://api-fapema.herokuapp.com/fapema'
 const access_token = sessionStorage.getItem('token')
 const urlParams = new URLSearchParams(window.location.search);
 const matricula = urlParams.get('matricula')

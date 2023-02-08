@@ -1,5 +1,5 @@
 
-const urlAPI = 'http://localhost:8080/account/register'
+const urlAPI = 'https://api-fapema.herokuapp.com/account/register'
 
 const nomeInput = document.querySelector('#nome');
 const cpfInput = document.querySelector('#cpf');

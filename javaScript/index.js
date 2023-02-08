@@ -1,4 +1,4 @@
-const url = 'https://fapema-api.herokuapp.com/fapema/limite/3';
+const url = 'https://api-fapema.herokuapp.com/fapema/limite/3';
 const cardBody = document.querySelector('.alunos-recentes');
 
 addEventListener('load', async () => {

@@ -1,5 +1,5 @@
 
-const urlAPI = 'https://fapema-api.herokuapp.com/account/login'
+const urlAPI = 'https://api-fapema.herokuapp.com/account/login'
 
 const entrar = document.querySelector('button[name=entrar]')
 entrar.addEventListener('click', async (e) => {
