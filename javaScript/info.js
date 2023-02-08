@@ -136,9 +136,9 @@ submitFoto.addEventListener('click', (e) => {
     data.append('file', imageFile.files[0]);
 
     axios.patch(`${url}/cadastroFoto/${matricula}`, data, {
-        headers: {
-            "Content-Type": `multipart/form-data; boundary=${data._boundary}`
-        }
+        // headers: {
+        //     "Content-Type": `multipart/form-data; boundary=${data._boundary}`
+        // }
     })
 
     setTimeout(() => {

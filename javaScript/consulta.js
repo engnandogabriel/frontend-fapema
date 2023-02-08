@@ -76,7 +76,7 @@ async function carregarNome(nome) {
         if(dados.length == 0){
             msgErroNome.style.display = 'block'
             setInterval(() => {
-                msgErroNome.style.display = 'nones'
+                msgErroNome.style.display = 'none'
             }, 2000)
             limparDados()
             carregaDados()
