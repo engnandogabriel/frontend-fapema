@@ -64,6 +64,7 @@ formSearch.addEventListener('click', (e) => {
     }
 })
 
+//carregar nomes
 async function carregarNome(nome) {
     await axios.get(`${url}/name/${nome}`, {
         headers: {
