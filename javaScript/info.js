@@ -2,13 +2,27 @@
 const url = 'https://api-fapema.herokuapp.com/fapema'
 const access_token = sessionStorage.getItem('token')
 const urlParams = new URLSearchParams(window.location.search);
-const matricula = urlParams.get('matricula')
+const matricula = urlParams.get('matricula');
+
+
+async function carregarApi(){
+    await axios.get(`${url}/${matricula}`)
+    .then(response => {
+        const data = response.data;
+        return data;
+    }).catch(err => {
+        alert("Erro no servidor! Tente novamente mais tarde");
+    })
+}
 
 //dados dos alunos
 var nomeAluno = document.querySelector('#nome-aluno');
 var cpfAluno = document.querySelector('#cpf-aluno');
 var matAluno = document.querySelector('#mat-aluno');
 var cursoAluno = document.querySelector('#curso-aluno');
+
+//dados frequencia
+var tbody = document.querySelector('.tbody');
 
 //modal
 var atualizaDadosClass = document.querySelector('.btn-atualiza '); //abrir modal de atualização
@@ -32,27 +46,71 @@ var msgErro = document.querySelector('.msg-erro')
 
 addEventListener('load', ()=>{
     carregaDados();
+    carregarFrequencia();
 })
 
 //busca dados da API
-
 async function carregaDados(){
     await axios.get(`${url}/${matricula}`)
     .then(response => {
-        const data = response.data;
-        nomeAluno.innerHTML += data.nome
-        cpfAluno.innerHTML += data.cpf
-        matAluno.innerHTML += data.matricula
-        cursoAluno.innerHTML += data.curso
-        console.log(data.foto)
-        if(data.foto === "")
-            fotoAluno.setAttribute('src', 'img/semfoto.jpg')
+        const dados = response.data;
+        nomeAluno.innerHTML += dados.nome;
+        cpfAluno.innerHTML += dados.cpf;
+        matAluno.innerHTML += dados.matricula;
+        cursoAluno.innerHTML += dados.curso;
+
+        if(dados.foto === "")
+            fotoAluno.setAttribute('src', 'img/semfoto.jpg');
         else
-            fotoAluno.setAttribute('src', data.foto)
-        console.log(data.foto)
+            fotoAluno.setAttribute('src', dados.foto);
     }).catch(err => {
         alert(err)
     })
+}
+
+//buscar frequencia
+async function carregarFrequencia(){
+
+    await axios.get(`${url}/${matricula}`)
+    .then(response => {
+        const dados = response.data;
+        var frequenias = dados.frequencia;
+        frequenias.forEach(frequencia => {
+
+            
+            //apresentar a data por extenso
+            let data = frequencia.split('T')[0]; // recuperar apenas a data
+            var diaExtenso = diaDaSemana(data);
+
+
+            let hora = frequencia.split('T')[1]; // recuperar apenas a hora
+            hora = hora.replace(':','h')
+            let dataFormatada = data.split('-').reverse().join('/');
+
+            tbody.innerHTML += `
+             <tr>
+                <td>${dataFormatada}</td>
+                <td>${diaExtenso}</td>
+                <td>${hora}</td>
+                <td>Presente</td>
+            </tr>`
+        });
+
+    })
+}
+
+//retornar o dia da semana por extenso
+function diaDaSemana(frequencia){
+    dayName = new Array ("Domingo", "Segunda-Feira", "Terça-Feira", "Quarta-Feira", "Quinta-Feira", "Sexta-Feira", "Sábado");
+
+    var now = new Date(frequencia);
+    var indexDay = now.getDay() + 1;
+
+    if(indexDay == 7) indexDay = 0;
+
+    console.log(indexDay);
+
+    return dayName[indexDay]
 }
 
 atualizaDadosClass.addEventListener('click', () => {
@@ -75,8 +133,9 @@ btnAtualiza.addEventListener('click', async () => {
     
 })
 
-//abiri modal cadastra foto
 
+
+//abiri modal cadastra foto
 
 //function atualiza dados na api
 async function atualizaDados(){
@@ -103,14 +162,6 @@ async function atualizaDados(){
     })
     
 }
-
-//function cadastrar foto
-
-//var atualizaDadosClass = document.querySelector('.btn-atualiza '); //abrir modal de atualização
-//var btnAtualiza = document.querySelector('.atualizar-dados') //atualizar dados no banco de dados
-//var formFoto = document.querySelector('.form-cadastro-foto')
-//var cadastrarFoto = document.querySelector('.btn-cadastra-foto')
-//var submitFoto = document.querySelector('.cadastrar-foto ')
 
 formFoto.addEventListener('change', (e) => {
     var event = e.target || window.event.srcElement;

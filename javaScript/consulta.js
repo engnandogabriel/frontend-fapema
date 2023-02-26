@@ -40,7 +40,7 @@ async function carregaDados() {
             <td>${data.cpf}</td><td>${data.matricula}</td>
             <td>${data.curso}</td>
             <td><button type='button' class='btn btn-danger' onclick="excluir('${data.matricula}')"><i class='bi bi-trash'>Excluir</button></td>
-            <td><button type='button' class='btn btn-primary' onclick="alterar('${data.matricula}')"><i class='bi bi-pencil-fill'>Alterar</button></td>`
+            <td><button type='button' class='btn btn-primary' onclick="alterar('${data.matricula}')"><i class='bi bi-pencil-fill'>Alterar</button></td></tr>`
             id++
         });
 
@@ -48,21 +48,26 @@ async function carregaDados() {
 }
 
 //filtar por nome
+ var pesquisaInput = document.querySelector('.pesquisa')
+ var formSearch = document.querySelector('.search-button')
+
+pesquisaInput.addEventListener('keyup', (e) => {
+    let expressao = pesquisaInput.value.toLocaleLowerCase();
 
 
-var pesquisaInput = document.querySelector('.pesquisa')
-var formSearch = document.querySelector('.search-button')
+    let linhas = tbody.getElementsByTagName('tr');
 
-formSearch.addEventListener('click', (e) => {
-    e.preventDefault()
-    var nome = pesquisaInput.value
-    if(nome){
-        carregarNome(nome)
-    }else{
-        limparDados()
-        carregaDados()
+    for (let pos in linhas){
+        if(true === isNaN(pos)) continue;
+
+        let conteudo = linhas[pos].innerHTML.toLocaleLowerCase();
+
+        if (conteudo.includes(expressao)) linhas[pos].style.display = ''
+        else linhas[pos].style.display = 'none'
     }
+
 })
+
 
 //carregar nomes
 async function carregarNome(nome) {
@@ -98,6 +103,7 @@ async function carregarNome(nome) {
                 <td><button type='button' class='btn btn-danger' onclick="excluir('${data.matricula}')"><i class='bi bi-trash'>Excluir</button></td>
                 <td><button type='button' class='btn btn-primary' onclick="alterar('${data.matricula}')"><i class='bi bi-pencil-fill'>Alterar</button></td>`
                 id++
+
             })
         }
         

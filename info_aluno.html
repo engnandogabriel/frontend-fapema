@@ -69,7 +69,7 @@
                         </div>
                         <div class="card-body" style="text-align: left;">
                             <div class="row mt-3 info-aluno">
-                              <div class="col-md-3" >
+                              <div class="col-md-3 container-image" >
                                 <img id="foto-aluno" src="img/semfoto.jpg"  alt="Foto do Aluno" width="100%">
                               </div>
                               <div class="col-md-8">
@@ -95,8 +95,36 @@
                             </div>
                         </div>
                       </div>
+
+                      <!--Frequencia do aluno-->
+                      <div class="row mt-4">
+                        <div class="col-md-12">
+                            <div class="card text-center mt-3">
+                                <div class="card-header">
+                                  Frequencia do aluno
+                                </div>
+                                <div class="listagem-alunos">
+                                  <table class="table table-hover" id="dados-frequencia">
+                                      <thead>
+                                        <tr>
+                                          <th scope="col">Data</th>
+                                          <th scope="col">Dia da semana</th>
+                                          <th scope="col">Hora</th>
+                                          <th scope="col">Status</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody class="tbody">
+                                      </tbody>
+                                    </table>
+                                </div><!--listagem-alunos-->
+                              </div><!--card text-center mt-3-->
+                        </div>
+                    </div>
+
                 </div>
+
             </div>
+
         </main>
         <footer>
             <div class="row">
@@ -116,6 +144,7 @@
           </footer>
 
     </div><!--container-->
+
 
 <!-- Modal atualizar aluno-->
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
