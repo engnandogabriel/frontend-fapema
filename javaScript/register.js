@@ -1,5 +1,5 @@
 
-const urlAPI = 'https://api-fapema.herokuapp.com/account/register'
+const urlAPI = 'https://web-production-9f8c8.up.railway.app/account/register'
 
 const nomeInput = document.querySelector('#nome');
 const cpfInput = document.querySelector('#cpf');
